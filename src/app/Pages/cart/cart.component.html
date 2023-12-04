@@ -1,0 +1,78 @@
+<div style="background-color: aqua;" class="card">
+    <h1 style="text-align: center;">
+        Shopping Cart
+    </h1>
+    <h5 style="text-align: center;" *ngIf="TotalValue == undefined || TotalValue == null">Sub-Total: {{0}}</h5>
+    <h5 style="text-align: center;" *ngIf="TotalValue != undefined || TotalValue != null">Sub-Total: {{TotalValue}}</h5>
+   
+</div>
+<div class="flex my-3" style="text-align: center;" *ngIf="TotalValue">
+    <button class="btn btn-primary" (click)="saveUserData()">Buy Now</button>
+ </div>
+<div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6" *ngFor="let cart of cartData">
+            <div class="card mx-auto">
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <img [src]="cart.thumbnail" class="card-img-top" alt="Phone Photos" height="200px">
+                        </div>
+                        <div class="col-lg-8 col-md-6 col-sm-12">
+                            <h5 class="card-title">{{cart.title}}</h5>
+
+                            <div>
+                                <label style="float: left;"><strong>Price:</strong> &nbsp;{{cart.price}}</label>
+                                <label style="float: right;"><strong>Rating:</strong> &nbsp;{{cart.rating}}</label>
+                            </div>
+
+                            <div class="row mt-5">
+                                <div class="col-lg-4 col-md-4 col-sm-12 d-flex">
+                                    <button class="btn btn-primary"
+                                        (click)="quantityCounterDecrement(cart)"><strong>-</strong></button>
+                                    <!-- <input  class="form-control" type="text" *ngIf="cart.quantity == null"  disabled value=1 /> -->
+                                    <input class="form-control" type="text" disabled value="{{cart.quantity}}" />
+                                    <button class="btn btn-primary"
+                                        (click)="quantityCounterIncrement(cart)"><strong>+</strong></button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <h3>Grand Total for {{cart.title}}: {{cart.price*cart.quantity}}</h3>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="card" *ngIf="ShowForm === true">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+                    <div class="m-3">
+                      <label for="name" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="name" formControlName="name">
+                    </div>
+                    <div class="m-3">
+                      <label for="address" class="form-label">Address</label>
+                      <input type="text" class="form-control" id="address" formControlName="address">
+                    </div>
+                    <div class="m-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <div class="text-center m-1">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                  </form>
+            </div>
+        </div>
+      
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<header>
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1"><a routerLink="/home">Amba</a></span>
+    <input type="text" name="search" [(ngModel)]="searchText" *ngIf="(cartData | filter: searchText).length > 0">
+    <i class="fa-solid fa-cart-shopping" routerLink="/addtocart"><span class="badge bg-secondary px-2">{{cartData.length}}</span></i>
+  </div>
+</nav>
+</header>
+<section>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</section>

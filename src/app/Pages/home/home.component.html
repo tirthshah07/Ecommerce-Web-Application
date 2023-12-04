@@ -1,0 +1,36 @@
+<div class="row">
+  <input type="text" name="search" [(ngModel)]="searchText">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-3 mt-3" *ngFor="let product of ProductList.products | filter:searchText">
+     
+        <div class="card mx-auto">
+            <img [src]="product.thumbnail" class="card-img-top" alt="Phone Photos" height="200px">
+            <div class="card-body">
+              <h5 class="card-title">{{product.title}}</h5>
+              <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <label><strong>Price:</strong> &nbsp;{{product.price}}</label>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <label><strong>Rating:</strong> &nbsp;{{product.rating}}</label>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12" style="align-self: center;">
+                <a
+                  [title]="product.title + ' details'"
+                  [routerLink]="['/products', product.id]"
+                  >View Details</a
+                >
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <button type="button" class="btn btn-primary" (click)="notifyMe()" *ngIf="product.stock == 0">Notify Me</button>
+                <button type="button" class="btn btn-primary" (click)="addToCart(product)" *ngIf="product.stock != 0">Buy</button>
+              </div>
+            </div>
+              <div>           
+            </div>
+            </div>
+          </div>
+    </div>
+    <div class="m-2 text-center">
+    <button class="btn btn-primary" style="width: max-content;" (click)="loadMoredata()">Load More</button>
+  </div>
+</div>
